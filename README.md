@@ -3,14 +3,14 @@
 Land values per acre for every US county, from official USDA and FHFA statistics, as a free static website that
 updates itself.
 
-**Live:** https://theguysaccount.github.io/land-index-fund/
+**Live:** https://index.grounded.to/ (the first address, https://theguysaccount.github.io/land-index-fund/, redirects there)
 
 - **County pages** (about 3,100): USDA Census of Agriculture value of farm land and buildings per acre for every census
   since 1997, an annual series that joins census years with the state's yearly USDA survey (estimates are labelled as
   estimates), county cash rents, FHFA residential land values, rank in state and nation, and neighbouring counties.
 - **State pages** with a county map and a sortable table; **rankings**; a national map and series.
 - **Downloads and API**: CSV for every county, state and the whole index; static JSON per county; an embeddable card.
-- **Method**: every step is on the [method page](https://theguysaccount.github.io/land-index-fund/methodology/).
+- **Method**: every step is on the [method page](https://index.grounded.to/methodology/).
 
 Not investment advice and not an appraisal. A statistical summary of public data.
 

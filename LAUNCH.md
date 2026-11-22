@@ -1,18 +1,19 @@
 # LAUNCH
 
 ## Live now
-- https://theguysaccount.github.io/land-index-fund/ (GitHub Pages, deployed by `deploy.yml`). Indexed: robots
-  allow, sitemap listed in the account's host-root robots.txt, IndexNow pinged on every deploy.
+- https://index.grounded.to/ (GitHub Pages with a custom domain since 2026-11-22, deployed by `deploy.yml`; the first
+  address, https://theguysaccount.github.io/land-index-fund/, redirects). Indexed: robots allow, sitemap in
+  robots.txt, IndexNow pinged on every deploy (all 3,171 pages sent for the new host on 2026-11-22).
 
-## Domain (a key; nothing has been changed)
-`grounded.to` is the portfolio match. It is live on SiteGround today (a small "Grounded To" page), so the plan is
-to build on top of it with a subdomain rather than replace it:
+## Domain (done 2026-11-22 by the domain-rollout session)
+`grounded.to` is the portfolio match. It stays live on SiteGround (its own "Grounded To" page), and the index was
+built on top of it with a subdomain rather than replacing it:
 
 | Record | Host | Value |
 |---|---|---|
 | CNAME | `index` | `theguysaccount.github.io.` |
 
-Then the four commands in OPERATIONS.md ("Custom domain"). If Jack prefers the apex later, the GitHub Pages apex
+Then the commands in OPERATIONS.md ("Custom domain"). If Jack prefers the apex later, the GitHub Pages apex
 records are A `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` and AAAA
 `2606:50c0:8000::153` to `2606:50c0:8003::153`, which would replace what SiteGround serves, so that needs his
 explicit decision.

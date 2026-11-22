@@ -47,4 +47,4 @@ content under Jack's name.
 - Relationship to Landosaur (open question): separate sites. Landosaur's static edition can link to these county
   pages for price context later; no shared code.
 - Domain: `grounded.to` is already serving a small page, so a subdomain (`index.grounded.to`) is proposed rather
-  than replacing it. A separate domain-rollout session owns DNS.
+  than replacing it. A separate domain-rollout session owns DNS. (Done on 2026-11-22 by that session.)

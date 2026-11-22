@@ -11,6 +11,7 @@
   weekly check fired on its own on 2026-11-22 and passed.
 - Known limits: county values are averages of operator estimates; post-2022 values are state-moved estimates;
   Alaska is reported in five USDA areas; FHFA's series is experimental and last ran to 2022.
-- Not done (keys, see OPERATIONS.md): custom domain, support link, analytics, Search Console.
+- Address: https://index.grounded.to since 2026-11-22 (moved by the domain-rollout session; github.io redirects).
+- Not done (keys, see OPERATIONS.md): support link, analytics, Search Console.
 - Reusable elsewhere: `landindex/xlsx.py` (stdlib .xlsx reader), `landindex/sources.py` (resumable download, NASS
   bulk parsing), `scripts/cdp.mjs` + `e2e.mjs` (Chrome test without dependencies), the SVG chart and map code.
