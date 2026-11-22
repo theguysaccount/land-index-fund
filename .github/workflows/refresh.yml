@@ -1,0 +1,64 @@
+# Check USDA NASS and FHFA for new releases. When a source has published something new, extract it, test it,
+# build the site once to prove it, commit data/ and dispatch the deploy.
+# Monthly, plus weekly from August to October (USDA's land values report comes out in early August and county
+# cash rents follow). Safe to re-run at any time: unchanged sources are not downloaded again.
+# Fails safe: a source that fails is retried, then kept on its last good data (a warning, not a failure);
+# a failed test or build stops before anything is committed.
+name: Refresh data
+
+on:
+  schedule:
+    - cron: "41 7 3 * *"
+    - cron: "41 7 * 8-10 1"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Download and extract even if the source files look unchanged
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Tests before
+        run: python -m unittest discover -s tests -t .
+      - name: Refresh sources
+        id: refresh
+        run: python -m landindex.refresh --work work ${{ inputs.force && '--force' || '' }}
+      - name: Tests and a full build on the new data
+        if: steps.refresh.outputs.changed == 'true'
+        run: |
+          python -m unittest discover -s tests -t .
+          python -m landindex.build dist
+          python scripts/check_dist.py dist
+      - name: Commit data and deploy
+        run: |
+          if [ -z "$(git status --porcelain data)" ]; then echo "Nothing new."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git commit -m "Data refresh $(date -u +%Y-%m-%d)"
+          git pull --rebase --quiet origin main
+          git push origin HEAD:main
+          gh workflow run deploy.yml --ref main
+
+  keepalive:
+    needs: refresh
+    if: always() && github.event_name == 'schedule'
+    uses: ./.github/workflows/keepalive.yml

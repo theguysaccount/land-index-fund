@@ -1,0 +1,36 @@
+# Tests on every push and pull request. Synthetic fixtures plus invariants of the committed data; no network.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Build and guard the full site
+        run: |
+          python -m landindex.build dist
+          python scripts/check_dist.py dist
+      - name: Client scripts parse
+        run: |
+          node --check site/app.js
+          node --check site/embed.js
+          node --check scripts/e2e.mjs

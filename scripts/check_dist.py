@@ -45,7 +45,7 @@ def resolve(dist, base, url):
     return os.path.join(dist, rel)
 
 
-def main(dist):
+def main(dist, data_dir=None):
     base = config.base_path()
     problems = []
     titles, canon = {}, {}
@@ -110,7 +110,7 @@ def main(dist):
     if "Sitemap: %s/sitemap.xml" % config.BASE_URL not in open(os.path.join(dist, "robots.txt")).read():
         problems.append("robots.txt does not point at the sitemap")
 
-    ix = Index()
+    ix = Index(data_dir)
     for fips, c in ix.counties.items():
         if not os.path.exists(resolve(dist, base, base + ix.county_path(c))):
             problems.append("county %s (%s) has no page" % (fips, c["label"]))
@@ -119,7 +119,8 @@ def main(dist):
     search = json.load(open(os.path.join(dist, "api", "counties.json")))
     if len(search) != len(ix.counties):
         problems.append("search index has %d counties, data has %d" % (len(search), len(ix.counties)))
-    key = open(os.path.join(ROOT, "site", "indexnow-key.txt")).read().strip()
+    with open(os.path.join(ROOT, "site", "indexnow-key.txt")) as fh:
+        key = fh.read().strip()
     if not os.path.exists(os.path.join(dist, key + ".txt")):
         problems.append("IndexNow key file missing")
 

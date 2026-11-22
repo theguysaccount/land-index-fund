@@ -141,7 +141,8 @@ def build(dist, data_dir=None, log=print):
     w.write("assets/style.css", css)
     for name in STATIC[1:]:
         shutil.copy(os.path.join(config.SITE_SRC, name), os.path.join(dist, "assets", name))
-    key = open(os.path.join(config.SITE_SRC, "indexnow-key.txt")).read().strip()
+    with open(os.path.join(config.SITE_SRC, "indexnow-key.txt")) as fh:
+        key = fh.read().strip()
     w.write("%s.txt" % key, key)
 
     # --- national map

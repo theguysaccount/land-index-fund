@@ -152,6 +152,17 @@ def refresh_fhfa(data_dir, work, entry, force=False, local=None, log=print):
     return changed, info
 
 
+def _without_checks(status):
+    """The status minus the fields that change on every run."""
+    import copy
+    s = copy.deepcopy(status)
+    s.pop("checked", None)
+    for entry in s.get("sources", {}).values():
+        entry.pop("checked", None)
+        entry.pop("last_ok", None)
+    return s
+
+
 JOBS = (("usda", "USDA NASS Quick Stats", refresh_usda), ("fhfa", "FHFA residential land prices", refresh_fhfa))
 
 
@@ -163,6 +174,7 @@ def run(data_dir=None, work=None, force=False, local=None, today=None, log=print
     local = local or {}
     status = sources.load_status(data_dir)
     status.setdefault("sources", {})
+    before = _without_checks(status)
     changed_all, warnings = [], []
     made = None
     if work is None:
@@ -189,7 +201,10 @@ def run(data_dir=None, work=None, force=False, local=None, today=None, log=print
         else:
             log("%s: no change" % label)
     status["checked"] = today
-    sources.save_status(status, data_dir)
+    # A check that found nothing new changes only the "checked" dates: leave the file alone, so the scheduled job
+    # makes no commit. Anything else (new data, a new upstream file, a failure or a recovery) is recorded.
+    if changed_all or _without_checks(status) != before or not os.path.exists(os.path.join(data_dir, "status.json")):
+        sources.save_status(status, data_dir)
     if made:
         for name in os.listdir(made):
             os.remove(os.path.join(made, name))
