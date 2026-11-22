@@ -67,7 +67,10 @@ try {
     for (const p of ["/", "/iowa/", "/iowa/story-county/", "/rankings/", "/data/", "/methodology/"]) {
       await page.goto(base + p);
       const w = await page.eval("document.documentElement.scrollWidth");
-      if (w > 376) bad.push(p + " is " + w + "px wide");
+      if (w > 376) {
+        const culprits = await page.eval("[...document.querySelectorAll('main *')].filter(e => e.getBoundingClientRect().right > 376 && !e.closest('.scroll')).slice(0, 3).map(e => e.tagName + '.' + e.className).join(', ')");
+        bad.push(p + " is " + w + "px wide (" + culprits + ")");
+      }
       if (p === "/iowa/story-county/") {
         const narrow = await page.eval("!!document.querySelector('.chart-wrap.narrow').offsetParent");
         if (!narrow) bad.push("phone chart not shown");

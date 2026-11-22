@@ -751,12 +751,12 @@ class Site(object):
 It uses only official statistics, says which numbers are observed and which are estimated, and publishes every input.</p>
 
 <section><h2>The sources</h2>
-<table class="data"><thead><tr><th scope="col">Source</th><th scope="col">What it measures</th><th scope="col">Detail</th><th scope="col">How often</th></tr></thead><tbody>
+<div class="scroll"><table class="data"><thead><tr><th scope="col">Source</th><th scope="col">What it measures</th><th scope="col">Detail</th><th scope="col">How often</th></tr></thead><tbody>
 <tr><th scope="row">USDA Census of Agriculture</th><td>Estimated market value of farm land and buildings, per acre</td><td>County</td><td>Every five years (%(cy)d is the latest)</td></tr>
 <tr><th scope="row">USDA Land Values survey</th><td>Farm real estate, cropland and pasture value per acre</td><td>State (48 contiguous states)</td><td>Every year, published in August</td></tr>
 <tr><th scope="row">USDA Cash Rents survey</th><td>Rent paid per acre for cropland and pasture</td><td>County and state</td><td>Most years</td></tr>
 <tr><th scope="row">FHFA Working Paper 19-01 data</th><td>Value of the land under single-family homes</td><td>County (%(n_panel)s with yearly figures, %(n_cs)s with a pooled figure)</td><td>%(fy0)d to %(fy1)d; updated irregularly</td></tr>
-</tbody></table>
+</tbody></table></div>
 <p>All USDA series come from one public file, the National Agricultural Statistics Service's Quick Stats "economics" bulk download.
 FHFA's data is the workbook attached to its working paper. FHFA describes its series as experimental.</p></section>
 
