@@ -1,0 +1,59 @@
+{
+ "checked": "2026-11-10",
+ "sources": {
+  "fhfa": {
+   "changed": "2026-11-10",
+   "checked": "2026-11-10",
+   "failures": 0,
+   "first_year": "2012",
+   "label": "FHFA residential land prices",
+   "last_ok": "2026-11-10",
+   "latest_year": "2022",
+   "message": "",
+   "note": "extracted from a local file",
+   "ok": true,
+   "rows": {
+    "fhfa_county_cross_section.csv": 2444,
+    "fhfa_county_panel.csv": 11594,
+    "fhfa_nation_panel.csv": 11,
+    "fhfa_state_panel.csv": 561
+   },
+   "sha256": {
+    "fhfa_county_cross_section.csv": "3847f0fa56a87d5478b3ad3df8f3dda38835076d6ab09e699dfed7c5e1268a70",
+    "fhfa_county_panel.csv": "1dcbd410e6b033bd8d878e20ca860baf8c28d71d409b8228edbded372e771ab0",
+    "fhfa_nation_panel.csv": "26bc139b9919c76a440bd2799486f45340638fbaddf9b1ab14d56a7170a8da40",
+    "fhfa_state_panel.csv": "66e5c180750469a264eb0820cc4fd830680107a0247a4ea9fa8847ddefc2eaab"
+   },
+   "url": "",
+   "version": "Version 4.0 (June, 2024)"
+  },
+  "usda": {
+   "changed": "2026-11-10",
+   "checked": "2026-11-10",
+   "failures": 0,
+   "label": "USDA NASS Quick Stats",
+   "last_ok": "2026-11-10",
+   "latest_census_year": "2022",
+   "latest_rent_year": "2026",
+   "latest_survey_year": "2026",
+   "message": "",
+   "note": "extracted from a local file",
+   "ok": true,
+   "rows": {
+    "usda_census_state_land_value.csv": 306,
+    "usda_county_cash_rent.csv": 43882,
+    "usda_county_land_value.csv": 18460,
+    "usda_state_cash_rent.csv": 1492,
+    "usda_state_land_value.csv": 6002
+   },
+   "sha256": {
+    "usda_census_state_land_value.csv": "3346828c48a42d088a11faf14afe507883f2ff471b597bb80524e8c52ef280ee",
+    "usda_county_cash_rent.csv": "1057d62ab8834b3074a4dae0dea96f6d2b5ba137f5d0bca1c813f7dd9cda9e9b",
+    "usda_county_land_value.csv": "f259ab79eda9748d06612c867d95838d97e8f65dd183eaf7f54a2a0e5437f455",
+    "usda_state_cash_rent.csv": "137b65faf7ce7f68597e19e5f8b0899e251ba1bcbcd5be1f644920f6bc2facb0",
+    "usda_state_land_value.csv": "916d4f7fe9fd7977509ab320276d3194268cc4fe325abcb5957e5f65396dbb10"
+   },
+   "url": ""
+  }
+ }
+}
