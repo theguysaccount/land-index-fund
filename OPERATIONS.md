@@ -11,11 +11,11 @@ Live site: https://theguysaccount.github.io/land-index-fund/ (public name: **US 
 | `deploy.yml` Build and deploy | Pushes to `main` that touch code or data; dispatched by the refresh; by hand | Unit tests, build (about 3,200 pages, 9,500 files), the guard (`scripts/check_dist.py`), share images in headless Chrome, a browser test of the built site, then Pages deploy (a second attempt if the first stalls). After deploy it waits until the new build is served, runs the browser test on the live site and tells IndexNow about the pages whose content changed. | Anything failing before the deploy step leaves the last good deploy live. IndexNow never fails the run. |
 | `checks.yml` Weekly checks | Thursdays 05:23 UTC; by hand | `scripts/health.py`: key pages and files answer; the live data matches the repository (dispatches a deploy if not); no source has failed 3 refreshes in a row; USDA's survey year is current; 25 sampled county pages answer; **staleness**: if no refresh has succeeded for 40 days it dispatches one, and fails at 70 days. `scripts/linkcheck.py`: every sitemap URL answers 200; external links are checked politely and only warn. The browser test runs on the live site. | Read-only apart from dispatching a refresh or deploy. A failure emails the repository owner. |
 | `keepalive.yml` | Called by every scheduled workflow | Re-enables any workflow GitHub disabled for inactivity and pushes `.github/heartbeat` after 40 quiet days (GitHub disables schedules after 60). | Harmless when nothing is needed. |
-| `ci.yml` | Every push and pull request | Unit tests on Python 3.9 and 3.12, a full build plus guard, and a syntax check of the client scripts. | Read-only. |
+| `ci.yml` | Every push and pull request | Unit tests on Python 3.10 and 3.13 (runners on Ubuntu 26.04 have no 3.9; the code stays 3.9-compatible), a full build plus guard, and a syntax check of the client scripts. | Read-only. |
 
 Notes:
 - GitHub fires schedules late on this account (hours, in batches). Nothing depends on exact timing: every job is safe to re-run, and the weekly staleness check dispatches a refresh when scheduled runs go missing.
-- `checks.yml` carries a temporary line `17 * 22,23 11 *` that only fired on 22 and 23 November 2026 to prove the schedule trigger on a new repository. Delete it when convenient; it would fire again on the same dates next year.
+- Schedules proven: the first schedule-triggered weekly check ran on 2026-11-22 (about 8 hours after the cron was added, as is usual on this account) and passed; the temporary proof line was then removed.
 
 ## What to watch
 

@@ -53,7 +53,7 @@ def gh(*args):
 def main(base):
     base = base.rstrip("/")
     lines, failed = ["## Live site: %s" % base, ""], []
-    today = datetime.datetime.utcnow().date()
+    today = datetime.datetime.now(datetime.timezone.utc).date()
 
     def report(ok, text, fatal=True):
         lines.append("- %s %s" % ("ok  " if ok else ("FAIL" if fatal else "warn"), text))

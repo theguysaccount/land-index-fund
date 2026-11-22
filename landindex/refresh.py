@@ -21,7 +21,7 @@ from .sources import SourceError
 
 
 def _today():
-    return datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
 
 
 def _write_changed(tables, names, data_dir):
