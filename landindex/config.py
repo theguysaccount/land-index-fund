@@ -11,8 +11,10 @@ TAGLINE = "Land prices per acre for every US county, from official USDA and FHFA
 
 REPO = os.environ.get("LI_REPO", "theguysaccount/land-index-fund")
 REPO_URL = "https://github.com/" + REPO
-# The public address of the site, without a trailing slash. A custom domain changes only this.
-BASE_URL = os.environ.get("LI_BASE_URL", "https://theguysaccount.github.io/land-index-fund").rstrip("/")
+# The public address of the site, without a trailing slash: one setting. Fleet convention (~/code/DOMAIN_ROLLOUT.md):
+# repository variable SITE_URL; LI_BASE_URL also works.
+BASE_URL = (os.environ.get("SITE_URL") or os.environ.get("LI_BASE_URL")
+            or "https://theguysaccount.github.io/land-index-fund").rstrip("/")
 
 # Optional keys (see OPERATIONS.md). Empty means the feature stays off.
 SUPPORT_URL = os.environ.get("LI_SUPPORT_URL", "").strip()
